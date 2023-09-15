@@ -2,15 +2,12 @@ import { UserProps } from "../../types/user";
 
 import * as S from "./styles";
 
-const User = ({
+const UserHistoric = ({
   login,
-  name,
   avatar_url,
   followers,
   following,
   location,
-  email,
-  bio
 }: UserProps) => {
   return (
     <S.Container>
@@ -22,16 +19,6 @@ const User = ({
           <S.SpanLabelLocation>{location}</S.SpanLabelLocation>
         </S.PLabelLocation>
       )}
-      {email && (
-        <S.PLabelLocation>
-          <S.IconLocationCustom />
-          <S.SpanLabelLocation>{email}</S.SpanLabelLocation>
-        </S.PLabelLocation>
-      )}
-      <S.BoxBio>
-        <S.TitleBio>⫸⫸⫸ {name} ⫷⫷⫷</S.TitleBio>
-        <S.LabelBio>{bio}</S.LabelBio>
-      </S.BoxBio>
       <S.BoxContainerFollowWrapper>
         <S.BoxFollowWrapper>
           <S.PFollowers>Seguindo:</S.PFollowers>
@@ -46,4 +33,4 @@ const User = ({
   );
 };
 
-export default User;
+export default UserHistoric;

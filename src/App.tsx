@@ -1,16 +1,16 @@
 import { BrowserRouter } from 'react-router-dom';
-import classModule from './App.module.css'
+import * as S from './styles'
 import Routes from './screens/routes/routes';
 import { Provider } from 'react-redux';
-import store from './screens/store';
+import store from './store';
 
 function App() {
   return (
    <BrowserRouter>
    <Provider store={store}>
-    <div className={classModule.app}>
+    <S.Container>
     <Routes />
-    </div>
+    </S.Container>
    </Provider>
    </BrowserRouter>
   );

@@ -15,3 +15,11 @@ export const Container = styled.div`
 export const LabelUserLogin = styled.p`
   color: #9da5d1;
 `
+
+export const LinkCustom = styled.a`
+  color: #cecece;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+`

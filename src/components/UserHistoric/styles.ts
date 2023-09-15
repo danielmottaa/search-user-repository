@@ -12,8 +12,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1.2rem;
-  border: 1px solid #4d4d4d;
-  box-shadow: 1px 2px 9px #4d4d4d;
+  margin: 1rem 0 1rem 0;
+  margin-right: 15px;
 `;
 
 export const ImageCustom = styled.img`
@@ -69,12 +69,3 @@ export const ButtonLinkCustom = styled(Link)`
   padding: 1rem;
   border-radius: 5px;
 `;
-
-export const BoxBio = styled.div``
-
-export const TitleBio = styled.h4``
-
-export const LabelBio = styled.p`
-  color: #c4c4c4;
-  margin-top: 4px;
-`

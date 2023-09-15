@@ -14,6 +14,7 @@ export const InputCustom = styled.input`
   border-radius: 3px;
   border: none;
   color: #2b3566;
+  width: 100%;
 `
 
 export const ButtonCustom = styled.button`
