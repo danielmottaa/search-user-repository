@@ -4,9 +4,10 @@ import * as S from "./styles";
 
 type SearchProps = {
   loadUser: (userName: string) => Promise<void>;
+  value: string
 };
 
-const Search = ({ loadUser }: SearchProps) => {
+const Search = ({ loadUser, value }: SearchProps) => {
 
   const [userName, setUserName] = useState("");
 
@@ -23,9 +24,10 @@ const Search = ({ loadUser }: SearchProps) => {
       <S.BoxInput>
         <S.InputCustom
           type="text"
-          placeholder="Digite o nome do usuário"
+          placeholder={value}
           onChange={(e) => setUserName(e.target.value)}
           onKeyDown={handleKeyDown}
+          // value={value}
         />
         <S.ButtonCustom onClick={() => loadUser(userName)}>
           <BsSearch />

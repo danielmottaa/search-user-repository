@@ -8,6 +8,7 @@ export const LinkCustom = styled.a`
   justify-content: flex-start;
   align-items: center;
   width: 5%;
+  cursor: pointer;
 `;
 
 export const BoxContainerContent = styled.div`
@@ -27,5 +28,15 @@ export const BoxWarning = styled.div`
 export const LabelValidationHistoric = styled.p`
   font-size: 40px;
   font-weight: bolder;
-  color: #4F4F4F
+  color: #4F4F4F;
 `;
+
+export const ButtonCustom = styled.button`
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  /* display: flex; */
+  width: 200px;
+  height: 250px;
+  margin: 1rem 0 1rem 0;
+`

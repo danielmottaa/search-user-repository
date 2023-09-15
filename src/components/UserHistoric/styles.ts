@@ -13,7 +13,6 @@ export const Container = styled.div`
   justify-content: center;
   gap: 1.2rem;
   margin: 1rem 0 1rem 0;
-  margin-right: 15px;
 `;
 
 export const ImageCustom = styled.img`
@@ -23,7 +22,7 @@ export const ImageCustom = styled.img`
   border-radius: 50%;
 `;
 
-export const H2Label = styled.h2``;
+export const H2Label = styled.h4``;
 
 export const PLabelLocation = styled.p`
   display: flex;

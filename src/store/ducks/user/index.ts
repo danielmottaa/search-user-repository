@@ -1,12 +1,14 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 export interface IUser {
-  activeUser?: any;
+  activeUser: any[];
 }
 
-const INITIAL_STATE: IUser = {};
+export const userData = createAction<any>("USERDATA");
 
-export const userData = createAction<any>("@userdata");
+const INITIAL_STATE = {
+  activeUser: []
+} as IUser;
 
 export default createReducer(INITIAL_STATE, {
   [userData.type]: (state, action) => ({

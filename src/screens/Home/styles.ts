@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Navigate } from "react-router-dom";
 
 export const Container = styled.div`
   background-color: #2b3566;
@@ -22,4 +23,5 @@ export const LinkCustom = styled.a`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  cursor: pointer;
 `

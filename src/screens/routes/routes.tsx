@@ -7,6 +7,7 @@ export default () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/:login' element={<Home />} />
       <Route path='/Historic' element={<Historic />} />
     </Routes>
   )

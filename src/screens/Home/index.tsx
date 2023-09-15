@@ -5,15 +5,23 @@ import Search from "../../components/InputSearch/Search";
 import { UserProps } from "../../types/user";
 import User from "../../components/User";
 import Error from "../../components/Error";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as S from "./styles";
 import Loading from "../../components/Loading";
+import { useUserSelector } from "../../store/useReduxSelector";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = () => {
   const [user, setUser] = useState<UserProps | null>(null);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [historicData, setHistoricData] = useState<any>([]);
+  const [loginHistoric, setLoginHistoric] = useState<any>("Digite um nome de usuário");
   const dispatch = useDispatch();
+  const { activeUser } = useUserSelector();
+  const navigate = useNavigate();
+  const { login } = useParams();
 
   const loadUser = async (userName: string) => {
     try {
@@ -23,14 +31,21 @@ const Home = () => {
       const response = await fetch(`https://api.github.com/users/${userName}`);
       const data = await response.json();
 
-      console.log('DADOS API: ', data)
-
       if (response.status === 404) {
         setError(true);
         return;
       }
 
-      const { avatar_url, login, location, followers, following, email, bio, name } = data;
+      const {
+        avatar_url,
+        login,
+        location,
+        followers,
+        following,
+        email,
+        bio,
+        name,
+      } = data;
 
       const userDataResponse: UserProps = {
         avatar_url,
@@ -40,10 +55,12 @@ const Home = () => {
         following,
         email,
         bio,
-        name
+        name,
       };
 
       setUser(userDataResponse);
+      console.log(user);
+      pushHistoricData(userDataResponse);
     } catch (error) {
       console.log("Erro ao pesquisar usuário: ", error);
     } finally {
@@ -51,17 +68,47 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
+  const pushHistoricData = (user: any) => {
     if (user !== null) {
-      const teste = dispatch(userData(user));
-      console.log('OIIIIIIII', teste)
-     }
-  }, [user])
+      let newData = [...historicData];
+      if (!newData.find((data) => data.login === user.login)) {
+        newData.unshift(user);
+        setHistoricData(newData);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (user !== null && historicData !== null) {
+      dispatch(userData(historicData));
+      AsyncStorage.setItem("activeUser", JSON.stringify(historicData));
+    }
+  }, [historicData]);
+
+  useEffect(() => {
+    AsyncStorage.getItem("activeUser").then((item) => {
+      if (activeUser.length === 0 && item) {
+        setHistoricData(JSON.parse(item));
+        console.log(item);
+      } else {
+        setHistoricData(activeUser);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (login) {
+      setLoginHistoric(login);
+      loadUser(login)
+    }
+  }, [login]);
 
   return (
     <S.Container>
-    <S.LinkCustom href="/Historic">Histórico de pesquisa</S.LinkCustom>
-      <Search loadUser={loadUser} />
+      <S.LinkCustom onClick={() => navigate("/Historic")}>
+        Histórico de pesquisa
+      </S.LinkCustom>
+      <Search loadUser={loadUser} value={loginHistoric} />
       {isLoading && (
         <Loading type={"balls"} color={"#fff"} height="10%" width="10%" />
       )}
